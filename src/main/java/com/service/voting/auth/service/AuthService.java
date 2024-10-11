@@ -46,7 +46,7 @@ public class AuthService {
             if (!passwordEncoder.matches(password, userDetails.getPassword())) {
                 throw new CustomAuthException("Password not valid");
             }
-            String token = jwtService.generateToken(userRes); // Pastikan generateToken menerima UserRes
+            String token = jwtService.generateToken(userRes);
             return new TokenRes(token);
         } catch (UsernameNotFoundException e) {
             throw new CustomAuthException("User not found");

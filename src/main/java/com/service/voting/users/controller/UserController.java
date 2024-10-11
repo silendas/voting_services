@@ -1,6 +1,7 @@
 package com.service.voting.users.controller;
 
 import com.service.voting.common.path.BasePath;
+import com.service.voting.common.response.Message;
 import com.service.voting.common.response.Response;
 import com.service.voting.common.response.dto.GlobalDto;
 import com.service.voting.common.reuse.PageConvert;
@@ -24,10 +25,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    private ResponseEntity<Object> buildResponse(Object data, int status, int action) {
+    private ResponseEntity<Object> buildResponse(Object pageable, Object data, Message messageEnum, int action) {
         GlobalDto dto = new GlobalDto();
-        dto.setStatus(status);
+        dto.setStatus(messageEnum.getStatusCode());
         dto.setData(data);
+        dto.setPageable(pageable);
+        dto.setMessage(messageEnum.getMessage());
         return Response.buildResponse(dto, action);
     }
 
@@ -40,28 +43,29 @@ public class UserController {
         if (pagination) {
             Pageable pageable = PageRequest.of(page, size);
             Page<UserRes> pagedUsers = userService.getPagUsers(search, pageable);
-            return buildResponse(PageConvert.convert(pagedUsers), 200, 1);
+            return buildResponse(PageConvert.convert(pagedUsers), pagedUsers.getContent(), Message.SUCCESSFULLY_DEFAULT,
+                    1);
         } else {
             List<UserRes> users = userService.getUsers(search);
-            return buildResponse(users, 200, 1);
+            return buildResponse(null, users, Message.SUCCESSFULLY_DEFAULT, 1);
         }
     }
 
     @PostMapping
     public ResponseEntity<Object> createUser(@RequestBody UserReq userReq) {
         User user = userService.createUser(userReq);
-        return buildResponse(user, 200, 1);
+        return buildResponse(null, user, Message.SUCCESSFULLY_DEFAULT, 1);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateUser(@PathVariable Long id, @RequestBody UserReq userReq) {
         User user = userService.updateUser(id, userReq);
-        return buildResponse(user, 200, 1);
+        return buildResponse(null, user, Message.SUCCESSFULLY_DEFAULT, 1);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
-        return buildResponse(null, 200, 0);
+        return buildResponse(null, null, Message.SUCCESSFULLY_DEFAULT, 0);
     }
 }
