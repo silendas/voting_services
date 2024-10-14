@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.service.voting.common.reuse.Filter;
-import com.service.voting.users.dto.Req.UserReq;
-import com.service.voting.users.dto.Res.UserRes;
+import com.service.voting.users.dto.req.UserReq;
+import com.service.voting.users.dto.res.UserRes;
 import com.service.voting.users.filter.UserFilter;
-import com.service.voting.users.models.User;
+import com.service.voting.users.model.User;
 import com.service.voting.users.repository.PagUserRepository;
 import com.service.voting.users.repository.UserRepository;
 
@@ -35,14 +35,16 @@ public class UserService {
     public List<UserRes> getUsers(String search) {
         Specification<User> spec = filter.isNotDeleted()
                 .and(new UserFilter().notEqualId(1l))
-                .and(new UserFilter().byNameOrEmail(search));
+                .and(new UserFilter().byNameOrEmail(search))
+                .and(filter.orderByIdAsc());
         List<User> users = userRepo.findAll(spec);
         return users.stream().map(this::convertToUserRes).toList();
     }
 
     public Page<UserRes> getPagUsers(String search, Pageable pageable) {
         Specification<User> spec = filter.isNotDeleted()
-                .and(new UserFilter().byNameOrEmail(search));
+                .and(new UserFilter().byNameOrEmail(search))
+                .and(filter.orderByIdAsc());
         Page<User> users = pagUserRepo.findAll(spec, pageable);
         return users.map(this::convertToUserRes);
     }
@@ -89,7 +91,7 @@ public class UserService {
                 .phoneNumber(user.getPhoneNumber())
                 .address(user.getAddress())
                 .active(user.isActive())
-                .role(user.getRole()) // Pastikan User memiliki metode getRole()
+                .role(user.getRole())
                 .build();
     }
 

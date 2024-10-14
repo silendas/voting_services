@@ -37,7 +37,6 @@ public class AuthController {
         return buildResponse(tokenRes, Message.SUCCESSFULLY_LOGIN, 1);
     }
 
-
     @PostMapping("/logout")
     public ResponseEntity<Object> logout(@RequestHeader("Authorization") String token) {
         authService.logout(token);

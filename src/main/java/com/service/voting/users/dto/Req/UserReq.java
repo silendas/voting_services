@@ -1,4 +1,4 @@
-package com.service.voting.users.dto.Req;
+package com.service.voting.users.dto.req;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

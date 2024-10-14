@@ -1,12 +1,12 @@
-package com.service.voting.users.repository;
+package com.service.voting.auth.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import com.service.voting.users.model.Role;
+import com.service.voting.auth.model.LoginInfo;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long>, JpaSpecificationExecutor<Role>{
+public interface LoginInfoRepository extends JpaRepository<LoginInfo, Long>, JpaSpecificationExecutor<LoginInfo>{
     
 }

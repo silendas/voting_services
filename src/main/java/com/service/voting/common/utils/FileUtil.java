@@ -11,6 +11,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.service.voting.common.exception.ResourceNotFoundException;
+
 @Service
 public class FileUtil {
     private final Path defaultFileStorageLocation;
@@ -54,6 +56,21 @@ public class FileUtil {
             return fileName;
         } catch (IOException ex) {
             throw new RuntimeException("Could not store file " + fileName + ". Please try again!", ex);
+        }
+    }
+
+    public void deleteFile(String fileName, String customPath) {
+        Path fileStorageLocation = (customPath != null && !customPath.isEmpty()) ? Paths.get(customPath).toAbsolutePath().normalize() : this.defaultFileStorageLocation;
+        Path targetLocation = fileStorageLocation.resolve(fileName);
+
+        try {
+            if (!Files.exists(targetLocation)) {
+                throw new ResourceNotFoundException("File " + fileName + " does not exist.");
+            }
+
+            Files.delete(targetLocation);
+        } catch (IOException ex) {
+            throw new RuntimeException("Could not delete file " + fileName + ". Please try again!", ex);
         }
     }
 }

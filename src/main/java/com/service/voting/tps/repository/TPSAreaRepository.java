@@ -1,12 +1,12 @@
-package com.service.voting.users.repository;
+package com.service.voting.tps.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import com.service.voting.users.model.Role;
+import com.service.voting.tps.model.TPSArea;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long>, JpaSpecificationExecutor<Role>{
+public interface TPSAreaRepository extends JpaRepository<TPSArea, Long>, JpaSpecificationExecutor<TPSArea>{
     
 }

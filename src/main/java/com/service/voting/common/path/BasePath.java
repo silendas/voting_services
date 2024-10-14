@@ -5,7 +5,8 @@ public interface BasePath {
 
     String BASE_DASHBOARD = BASE_API + "/dashboard";
 
-    String BASE_REGISTER = BASE_API + "/register";
-
     String BASE_USERS = BASE_API + "/users";
+
+    String BASE_CANDIDATES = BASE_API + "/candidates";
+    String BASE_TPS = BASE_API + "/tps";
 }

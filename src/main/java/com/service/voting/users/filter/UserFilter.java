@@ -2,7 +2,7 @@ package com.service.voting.users.filter;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.service.voting.users.models.User;
+import com.service.voting.users.model.User;
 
 import jakarta.persistence.criteria.Predicate;
 

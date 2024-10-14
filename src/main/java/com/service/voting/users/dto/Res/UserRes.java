@@ -1,6 +1,6 @@
-package com.service.voting.users.dto.Res;
+package com.service.voting.users.dto.res;
 
-import com.service.voting.users.models.Role;
+import com.service.voting.users.model.Role;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

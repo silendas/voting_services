@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import com.service.voting.users.dto.Res.UserRes;
+import com.service.voting.users.dto.res.UserRes;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

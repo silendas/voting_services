@@ -31,7 +31,7 @@ import java.util.regex.Pattern;
 public class GlobalExceptionHandler extends BaseExceptionHandler {
 
     @ExceptionHandler(Exception.class)
-    public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
+    public final ResponseEntity<Object> handleAllException(Exception ex, WebRequest request) {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
 
@@ -58,7 +58,7 @@ public class GlobalExceptionHandler extends BaseExceptionHandler {
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public final ResponseEntity<Object> handleIllegalArgumentException(NotFoundException ex, WebRequest request) {
+    public final ResponseEntity<Object> handleNotFoundException(NotFoundException ex, WebRequest request) {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
 
@@ -114,7 +114,7 @@ public class GlobalExceptionHandler extends BaseExceptionHandler {
 
     
     @ExceptionHandler(CustomAuthException.class)
-    public final ResponseEntity<Object> handleResourceNotFoundException(CustomAuthException ex,
+    public final ResponseEntity<Object> handleCustomAuthException(CustomAuthException ex,
             WebRequest request) {
         List<String> details = new ArrayList<>();
         details.add(ex.getMessage());
@@ -128,7 +128,7 @@ public class GlobalExceptionHandler extends BaseExceptionHandler {
     }
 
     @ExceptionHandler(UserFoundException.class)
-    public final ResponseEntity<Object> handleResourceNotFoundException(UserFoundException ex,
+    public final ResponseEntity<Object> handleUserFoundException(UserFoundException ex,
             WebRequest request) {
         List<String> details = new ArrayList<>();
         details.add(ex.getMessage());
@@ -142,7 +142,7 @@ public class GlobalExceptionHandler extends BaseExceptionHandler {
     }
 
     @ExceptionHandler(NullPointerException.class)
-    public final ResponseEntity<Object> handleNullException(NullPointerException ex, WebRequest request) {
+    public final ResponseEntity<Object> handleNullPointerException(NullPointerException ex, WebRequest request) {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
 
@@ -155,7 +155,7 @@ public class GlobalExceptionHandler extends BaseExceptionHandler {
     }
 
     @ExceptionHandler(UsernameNotFoundException.class)
-    public final ResponseEntity<Object> handleNullException(UsernameNotFoundException ex, WebRequest request) {
+    public final ResponseEntity<Object> handleUsernameNotFoundException(UsernameNotFoundException ex, WebRequest request) {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
 
@@ -182,7 +182,7 @@ public class GlobalExceptionHandler extends BaseExceptionHandler {
     }
 
     @ExceptionHandler(BadCredentialsException.class)
-    public final ResponseEntity<Object> handleMethodArgumentTypeMismatchException(
+    public final ResponseEntity<Object> handleBadCredentialsException(
             BadCredentialsException ex, WebRequest request) {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());

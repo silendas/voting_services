@@ -1,4 +1,4 @@
-package com.service.voting.users.models;
+package com.service.voting.users.model;
 
 import com.service.voting.common.model.BaseEntity;
 import org.springframework.security.core.GrantedAuthority;
@@ -45,7 +45,7 @@ public class User extends BaseEntity implements UserDetails {
 
     private String email;
 
-    private String nik; // Pastikan nik juga unik
+    private String nik;
 
     private String username;
 
@@ -59,8 +59,6 @@ public class User extends BaseEntity implements UserDetails {
     private String address;
 
     private boolean isActive;
-
-    private boolean isDeleted;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

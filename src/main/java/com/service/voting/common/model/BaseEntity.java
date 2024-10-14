@@ -5,7 +5,6 @@ import lombok.Data;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreRemove;
 import jakarta.persistence.PreUpdate;
 
 import org.springframework.security.core.Authentication;
@@ -32,12 +31,6 @@ public abstract class BaseEntity {
 
     @Column(name = "updated_by")
     private String updatedBy;
-
-    @Column(name = "deleted_at")
-    private Timestamp deletedAt;
-
-    @Column(name = "deleted_by")
-    private String deletedBy;
 
     @Column(name = "is_deleted")
     private boolean isDeleted = false;
@@ -68,19 +61,6 @@ public abstract class BaseEntity {
         return null;
     }
 
-    public Timestamp getDeletedAt() {
-        if (deletedAt != null) {
-            LocalDateTime currentDateTime = deletedAt.toLocalDateTime();
-            ZoneId utcZone = ZoneId.of("UTC");
-            ZoneId wibZone = ZoneId.of("Asia/Jakarta");
-            ZonedDateTime utcDateTime = currentDateTime.atZone(utcZone);
-            ZonedDateTime wibDateTime = utcDateTime.withZoneSameInstant(wibZone);
-            LocalDateTime wibLocalDateTime = wibDateTime.toLocalDateTime();
-            return Timestamp.valueOf(wibLocalDateTime);
-        }
-        return null;
-    }
-
     @PrePersist
     public void onPrePersist() {
         this.createdAt = new Timestamp(System.currentTimeMillis());
@@ -97,13 +77,6 @@ public abstract class BaseEntity {
         this.updatedBy = getCurrentUserName();
     }
 
-    @PreRemove
-    public void onPreRemove() {
-        this.deletedAt = new Timestamp(System.currentTimeMillis());
-        this.deletedBy = getCurrentUserName();
-        this.isDeleted = true;
-    }
-
     private String getCurrentUserName() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()
@@ -111,6 +84,6 @@ public abstract class BaseEntity {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             return userDetails.getUsername();
         }
-        return null; // Handle cases where there is no authentication context
+        return null;
     }
 }

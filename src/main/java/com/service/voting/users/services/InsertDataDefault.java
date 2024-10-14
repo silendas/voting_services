@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.service.voting.users.models.Role;
-import com.service.voting.users.models.User;
+import com.service.voting.users.model.Role;
+import com.service.voting.users.model.User;
 import com.service.voting.users.repository.RoleRepository;
 import com.service.voting.users.repository.UserRepository;
 
@@ -39,7 +39,7 @@ public class InsertDataDefault {
         if (userRepository.count() == 0) {
             User user = new User();
             user.setUsername("admin");
-            user.setPassword(passwordEncoder.encode("adm123$21+4"));
+            user.setPassword(passwordEncoder.encode("2024$SAnks1JU4ng#"));
             user.setName("Administrator");
             user.setRole(getRole(1L));
             user.setEmail("admin@gmail.com");
